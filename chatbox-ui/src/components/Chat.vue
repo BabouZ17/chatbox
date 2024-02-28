@@ -25,7 +25,7 @@
 import { io } from 'socket.io-client'
 import { v4 as uuidv4 } from 'uuid'
 
-const socket = io('http://localhost:5000', { transports: ['websocket'], autoConnect: false })
+const socket = io('http://localhost:5000', { autoConnect: false })
 
 export default {
   data() {
@@ -40,7 +40,6 @@ export default {
   mounted() {
     socket.on('connect', () => {
       this.connected = true
-      console.log('connected')
       socket.emit('begin_chat')
 
       let message = {
@@ -53,7 +52,6 @@ export default {
 
     socket.on('disconnect', () => {
       this.connected = false
-      console.log('disconnected')
 
       let message = {
         id: uuidv4(),
@@ -66,7 +64,6 @@ export default {
     })
 
     socket.on('rsp', (msg) => {
-      console.log('received rsp')
       this.addMessages(msg)
     })
 
