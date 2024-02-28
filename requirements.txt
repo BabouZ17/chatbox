@@ -1,0 +1,4 @@
+python-socketio
+requests
+sanic
+websocket-client
